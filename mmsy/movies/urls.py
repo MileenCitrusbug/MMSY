@@ -1,7 +1,7 @@
-# from django.urls import path
+from django.urls import path
+from django.views.generic import TemplateView
+from . import views
 
-# from . import views
-
-# urlpatterns = [
-#     path('', views.home, name='home'),
-# ]
+urlpatterns = [
+    path('home/', views.req),
+]
