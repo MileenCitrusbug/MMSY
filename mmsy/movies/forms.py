@@ -5,13 +5,13 @@ from django.contrib.auth.forms import UserCreationForm
 from movies.models import User, AbstractUser
 
 class Signupform(UserCreationForm):
-
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = '__all__'
+        fields = ['username', 'first_name', 'last_name','email']
     def save(self,commit=True):
         user = super().save(commit=False)
-        user.save()
+        if commit:
+            user.save()
         return user
     # fname= forms.CharField(max_length=30)
     # lname= forms.CharField(max_length=30)

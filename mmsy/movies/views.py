@@ -2,9 +2,11 @@
 from urllib import request
 from django.views.generic import View, CreateView
 from django.shortcuts import render
+from django import forms
 from movies import forms
 from django.http import HttpResponse
-from .models import User
+from movies.models import User, AbstractUser
+from movies.forms import Signupform
 
 # class login(View):
 #     def get(self,request):
@@ -20,7 +22,7 @@ from .models import User
 class Signup(CreateView):
     model=User
     form_class = Signupform
-    template='/signup.html'
+    template_name = 'user_form.html'
     # def get(self,request):
     #     form = self.signupform()
     #     return render(request,self.template,{'form':form})
@@ -29,8 +31,10 @@ class Signup(CreateView):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            return render(request,'login', {'form':form})
+            msg = "success"
+            return HttpResponse(msg)
         else:
-            return HttpResponse("Error")
+            msg = "error"
+            return HttpResponse(msg)
 
             
