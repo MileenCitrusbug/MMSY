@@ -13,11 +13,11 @@ class Signupform(UserCreationForm):
         if commit:
             user.save()
         return user
-    # fname= forms.CharField(max_length=30)
-    # lname= forms.CharField(max_length=30)
-    # email = forms.EmailField(max_length=254)
-    # password= forms.CharField(max_length=30)
 
-# class loginform(forms.Form):
-#     email = forms.EmailField(max_length=254)
-#     password= forms.CharField(max_length=30)
+class Loginform(UserCreationForm):
+    class meta(UserCreationForm.Meta):
+        model = User
+        fields = ['email','password']
+    
+
+    

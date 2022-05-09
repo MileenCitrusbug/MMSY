@@ -1,9 +1,17 @@
+
 <!DOCTYPE html>
+
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
@@ -12,13 +20,13 @@
 style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp'); width: 100%; height: 100%;">
 <div class="mask d-flex align-items-center h-100 gradient-custom-3">
   <div class="container h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="row d-flex justify-content-center align-items-center h-50">
       <div class="col-12 col-md-9 col-lg-7 col-xl-6">
         <div class="card" style="border-radius: 15px;">
           <div class="card-body p-5">
-            <h1 class="text-uppercase text-center mb-5" style="color: white; font-size: 50px;"><center>Create an account</center></h1>
+            <h1 class=" text-center mb-5" style="color: rgb(102, 87, 87); font-size: 50px;"><center>Create an account</center></h1>
             <center>
-            <form action="" method="post" style="color:rgb(9, 69, 91); font-size: 25px;">
+            <form action="" method="post" style="color:rgb(9, 69, 91); font-size: 20px;">
               {% csrf_token %}
               
 
@@ -42,22 +50,18 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
                 Password : {{form.password1}}
               </div>
               <br>
-              <div class="form-check d-flex justify-content-center mb-5">
-                Con Password : {{form.password2}}
+              <div class="form-check d-flex justify-content-center mb-4  ">
+                Confirm Password :    {{form.password2}}
               </div>
               <br>
-              <div class="form-check d-flex justify-content-center mb-5">
-                I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-              </div>
-              <br>
-
+             
               <div class="d-flex justify-content-center">
-                <button type="button"
+                <button type="submit"
                   class="btn btn-success ">Register</button>
               </div>
               <br>
 
-              <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
+              <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="{% url 'login' %}"
                   class="fw-bold text-body"><u>Login here</u></a></p>
 
             </form>

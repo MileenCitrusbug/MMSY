@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import User,Language,Genre,Cast,Movie,Rating,Watchlist,subscriber
 #from .form import userceationform 
 
-#admin.site.register(User,UserAdmin)
+admin.site.register(User)
 admin.site.register(subscriber)
 admin.site.register(Language)
 admin.site.register(Genre)

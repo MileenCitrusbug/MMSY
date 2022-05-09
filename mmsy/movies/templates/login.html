@@ -97,23 +97,6 @@
             <div class="card-body px-4 py-5 px-md-5">
               <form action="" method="post">
                 {% csrf_token %}
-                {{form.as_p}}
-
-                <!-- <div class="row">
-                  <div class="col-md-6 mb-4">
-
-                    <div class="form-outline">
-                      <input type="text" id="form3Example1" class="form-control" />
-                      <label class="form-label" for="form3Example1">First name</label>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <input type="text" id="form3Example2" class="form-control" />
-                      <label class="form-label" for="form3Example2">Last name</label>
-                    </div>
-                  </div>
-                </div> -->
 
 
                 <div class="form-outline mb-4">
@@ -133,6 +116,11 @@
                 <button type="submit" class="btn btn-primary btn-block mb-4">
                   Log in
                 </button>
+
+                <p class="text-center text-muted mt-5 mb-0">If you are new to our site <a href="{% url 'signup' %}"
+                  class="fw-bold text-body"><u>Signup here</u></a></p>
+
+
 
 
               </form>
