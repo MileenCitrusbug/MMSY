@@ -9,8 +9,9 @@ from django.contrib.auth.views import LoginView
 
 urlpatterns = [
     path('login/', views.Login.as_view(), name='login'),
-    path('signup/',Signup.as_view(),name='signup'),
-    path('home/',Home.as_view(),name='home')
+    path('signup_admin/',views.Signup_admin.as_view(),name='signup_admin'),
+    path('signup_member/',views.Signup_member.as_view(),name='signup_member'),
+    path('',views.Home.as_view(),name='home')
 ]
 #path('account/eventadminlogin/', views.AdminLogin.as_view(), name='admin-login'),
 

@@ -2,14 +2,43 @@ import email
 from unicodedata import name
 from xml.etree.ElementTree import Comment
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+
+# class UserManager(BaseUserManager):
+#       def create_user(self, email, password, **extra_fields):
+#         """
+#         Create and save a User with the given email and password.
+#         """
+#         if not email:
+#             raise ValueError(_('The Email must be set'))
+#         email = self.normalize_email(email)
+#         user = self.model(email=email, **extra_fields)
+#         user.set_password(password)
+#         user.save()
+#         return user
+
+#       def create_superuser(self, email, password, **extra_fields):
+#         """
+#         Create and save a SuperUser with the given email and password.
+#         """
+#         extra_fields.setdefault('is_staff', True)
+#         extra_fields.setdefault('is_superuser', True)
+#         extra_fields.setdefault('is_active', True)
+
+#         if extra_fields.get('is_staff') is not True:
+#             raise ValueError(_('Superuser must have is_staff=True.'))
+#         if extra_fields.get('is_superuser') is not True:
+#             raise ValueError(_('Superuser must have is_superuser=True.'))
+#         return self.create_user(email, password, **extra_fields)
 
 
 class User(AbstractUser):
     is_admin=models.BooleanField(default=False)
     is_subscriber=models.BooleanField(default=True)
-    name=models.CharField(max_length=20)
+    # name=models.CharField(max_length=20)
     # name = models.CharField(max_length=30)
     # email = models.EmailField(max_length=254)
     # password = models.CharField(max_length=10)
@@ -25,14 +54,14 @@ class User(AbstractUser):
 #     email=models.EmailField(max_length=254)
 #     password=models.CharField( max_length=50)
 
-class subscriber(models.Model):
-    user=models.OneToOneField(User, on_delete=models.CASCADE)
-    name=models.CharField(max_length=20)
-    age=models.IntegerField()
+# class subscriber(models.Model):
+#     user=models.OneToOneField(User, on_delete=models.CASCADE)
+#     name=models.CharField(max_length=20)
+#     age=models.IntegerField()
 
     
-    def __str__(self):
-        return self.user
+    # def __str__(self):
+    #     return self.user
 
 
 class Language(models.Model): 

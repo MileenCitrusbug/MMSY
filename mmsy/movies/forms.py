@@ -2,7 +2,9 @@ from dataclasses import fields
 from pyexpat import model
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
 from movies.models import User, AbstractUser
+
 
 class Signupform(UserCreationForm):
     class Meta(UserCreationForm.Meta):
