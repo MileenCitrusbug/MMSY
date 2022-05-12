@@ -16,11 +16,12 @@
 
 <body>
     <style>
-     body{background-image: url("https://wallpaperaccess.com/full/1561985.jpg") }
+     .back{background-image: url("https://wallpaperaccess.com/full/1561985.jpg") }
      .line{margin-left: 400px;margin-right: 400px;font-family:cursive;}
      h4{color: rgb(169, 206, 206);font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;border-color: black;}
         
     </style>
+    {% if user.is_authenticated %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -33,12 +34,43 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
+                   
+                    <p style="color: white ; margin-right: 67px;font-size: 24px;font-family: cursive; ">Welcome.....<strong>{{request.user.first_name}}</strong></p>   
+                    
+            
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% else %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <h1>MOVIE ZONE</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,16 +81,21 @@
                             <div class="dropdown-divider"></div>
                             <h1 class="dropdown-header">SIGNUP</h1>
 
-                            <li><a class="dropdown-item" href="signup">Sign up as Admin</a></li>
-                            <li><a class="dropdown-item" href="#">Sign up as Member</a></li>
+                            <li><a class="dropdown-item" href="signup_admin">Sign up as Admin</a></li>
+                            <li><a class="dropdown-item" href="signup_member">Sign up as Member</a></li>
                         </ul>
+                       
+                       
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+    
 
-    <div style="background-image: https://wallpaperaccess.com/full/1561985.jpg; ">
+
+
+    <div class="back">
         <br>
         <br>
         <center>
@@ -81,9 +118,23 @@
           </h4>
 
         </center>
-
+        <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br>
     </div>
 
+{% endif %}
+<div>
+    {% block content %}
+
+
+
+    {% endblock %}
+</div>
 
 </body>
 

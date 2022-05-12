@@ -37,7 +37,7 @@ from django.contrib.auth import get_user_model
 
 class User(AbstractUser):
     is_admin=models.BooleanField(default=False)
-    is_subscriber=models.BooleanField(default=True)
+    is_subscriber=models.BooleanField(default=False)
     # name=models.CharField(max_length=20)
     # name = models.CharField(max_length=30)
     # email = models.EmailField(max_length=254)

@@ -13,11 +13,11 @@ from django import forms
 from movies import forms
 from django.http import HttpResponse
 from movies.models import User, AbstractUser
-from movies.forms import Signupform, Loginform
+from movies.forms import Signupadmin,Signupmember
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import auth
 from django.conf import settings
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model, login,logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 
@@ -36,7 +36,9 @@ class Login(View):
     def post(self,request):
         email=request.POST['email']
         raw_password=request.POST['password']
+        print(raw_password)
         pw=User.objects.get(email=email)
+        print(email)
         password=pw.password
         valid = check_password(raw_password,password)
         
@@ -47,18 +49,18 @@ class Login(View):
         user=User.objects.get(email=email)
         if user.is_authenticated:
 
-            if user.is_superuser == True:
+            if user.is_admin == True:
                 login(request, user)
-                return  HttpResponse("admin login")
+                return render(request,'admin/admin_home.html')
             else:
                 login(request,user)
-                return  HttpResponse("member login")
+                return render(request,'member/member_home.html') 
         else:
             return HttpResponse("invalid login")
 
 class Signup_admin(CreateView):
     model=User
-    form_class = Signupform
+    form_class = Signupadmin
     template_name = 'registration/signup_admin.html'
     # def get(self,request):
     #     form = self.signupform()
@@ -77,7 +79,7 @@ class Signup_admin(CreateView):
 
 class Signup_member(CreateView):
     model=User
-    form_class = Signupform
+    form_class = Signupmember
     template_name = 'registration/signup_member.html'
     # def get(self,request):
     #     form = self.signupform()
@@ -95,8 +97,15 @@ class Signup_member(CreateView):
             
 
 class Home(View):
-    template= 'base.html'
-    def get(self,request):
-        return render(request,self.template)   
+    model = User
+    template = 'base.html'
 
-            
+    def get(self, request):
+
+        return render(request, self.template)
+
+class Logout(View):
+    def get(self, request):
+        logout(request)
+        return redirect('home')
+     
