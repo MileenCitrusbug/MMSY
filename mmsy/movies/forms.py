@@ -4,7 +4,7 @@ from pyexpat import model
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from movies.models import User, AbstractUser
+from movies.models import *
 
 
 class Signupadmin(UserCreationForm):
@@ -28,4 +28,9 @@ class Signupmember(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class AddMovieForm(forms.ModelForm):
+    class Meta:
+        model = Movie
+        fields = "__all__"
 

@@ -12,7 +12,8 @@ urlpatterns = [
     path('signup_admin/',views.Signup_admin.as_view(),name='signup_admin'),
     path('signup_member/',views.Signup_member.as_view(),name='signup_member'),
     path('',views.Home.as_view(),name='home'),
-    path('logout/',views.Logout.as_view(),name='logout')
+    path('logout/',views.Logout.as_view(),name='logout'),
+    path('add_movie/',views.AddMovieView.as_view(),name='add_movie'),
 ]
 #path('account/eventadminlogin/', views.AdminLogin.as_view(), name='admin-login'),
 

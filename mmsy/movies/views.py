@@ -10,10 +10,10 @@ from urllib import request
 from django.views.generic import View, CreateView
 from django.shortcuts import render, redirect
 from django import forms
-from movies import forms
+from movies import models
 from django.http import HttpResponse
-from movies.models import User, AbstractUser
-from movies.forms import Signupadmin,Signupmember
+from movies.models import *
+from movies.forms import *
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import auth
 from django.conf import settings
@@ -46,12 +46,17 @@ class Login(View):
             return  HttpResponse("incorrect password")
             
 
-        user=User.objects.get(email=email)
+        user=User.objects.get(email=email) 
         if user.is_authenticated:
 
             if user.is_admin == True:
                 login(request, user)
-                return render(request,'admin/admin_home.html')
+                movielist=Movie.objects.all()
+                for i in movielist:
+                    print(i)
+                    # for j in i.get_variable("Language"):
+                    #     print(j)
+                return render(request,'admin/admin_home.html',{'movielist':movielist})
             else:
                 login(request,user)
                 return render(request,'member/member_home.html') 
@@ -108,4 +113,21 @@ class Logout(View):
     def get(self, request):
         logout(request)
         return redirect('home')
+
+class AddMovieView(CreateView):
+    model: Movie
+    form_class:AddMovieForm
+    
+
+    def get(self,request):
+        return render(request,'add_movie')
+    
+    def post(self, request):
+        form = self.form_class(request.POST)
+        form.save()
+        return render(request,'admin_home')
+        
+        
+
+
      
