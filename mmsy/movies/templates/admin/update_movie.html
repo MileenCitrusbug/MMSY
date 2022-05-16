@@ -1,4 +1,4 @@
- {% extends 'base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 <style>
     .gred {
@@ -8,7 +8,7 @@
 <div class="gred">
 
     <center>
-        <h1>Add Movie To List</h1>
+        <h1>Edit Movie</h1>
     </center> <br><br>
 
     <br><br>
@@ -28,10 +28,10 @@
                     {% csrf_token %}
 
                     <tr>
-                        <td>{{form.movie}}</td>
-                        <td>{{form.language}}</td>
-                        <td>{{form.cast}}</td>
-                        <td>{{form.genre}}</td>
+                        <td>{{movie.movie}}</td>
+                        <td>{{movie.language}}</td>
+                        <td>{{movie.cast}}</td>
+                        <td>{{movie.genre}}</td>
                         <!-- <form method="POST">
 
                 {% csrf_token %}
@@ -46,12 +46,14 @@
                     </tr>
             </tbody>
         </table><br><br>
-        <center><button type="submit" class="btn btn-secondary">Add</button></center>
+        <center><button type="submit" class="btn btn-secondary">Change</button></center>
 
         </form>
 
         <br><br><br>
     </div>
 </div>
+
+
 
 {% endblock %}

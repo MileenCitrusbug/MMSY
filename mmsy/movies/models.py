@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.forms import BooleanField
 
 
 # class UserManager(BaseUserManager):
@@ -89,6 +90,8 @@ class Movie(models.Model):
     language = models.ManyToManyField(Language)
     cast = models.ManyToManyField(Cast)
     genre = models.ManyToManyField(Genre)
+    delete = models.BooleanField(default=False)
+
    
 
     def __str__(self):

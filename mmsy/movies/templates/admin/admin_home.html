@@ -41,8 +41,8 @@
                 {% endfor %}
             </td>
 
-            <td><a type="button" class="btn btn-secondary" href="{% url 'add_movie' %}">Dlete</a>
-                <a type="button" class="btn btn-secondary" href="{% url 'add_movie' %}">Update</a>
+            <td><a type="button" class="btn btn-secondary" href="{% url 'delete_movie' movie.id %}">Delete</a>
+                <a type="button" class="btn btn-secondary" href="{% url 'update_movie' movie.id %}">Update</a>
                 
             </td>
           </tr>

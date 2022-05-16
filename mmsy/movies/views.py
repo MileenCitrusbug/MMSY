@@ -1,13 +1,16 @@
 
 
+from ast import Delete
 from distutils.command.clean import clean
 import email
+#from msilib.schema import ListView
 from multiprocessing.sharedctypes import Value
 from pickle import TRUE
 from pyexpat import model
 from statistics import mode
+from turtle import update
 from urllib import request
-from django.views.generic import View, CreateView
+from django.views.generic import View, CreateView,ListView,DeleteView,UpdateView,RedirectView
 from django.shortcuts import render, redirect
 from django import forms
 from movies import models
@@ -20,7 +23,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model, login,logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
-
+from django.urls import reverse_lazy
 
 
 
@@ -29,6 +32,7 @@ from django.contrib.auth.hashers import check_password
 
 class Login(View):
     model=User
+    template_name = 'admin/admin_home.html'
     def get(self,request):
         return render(request,'registration/login.html')
 
@@ -51,12 +55,7 @@ class Login(View):
 
             if user.is_admin == True:
                 login(request, user)
-                movielist=Movie.objects.all()
-                for i in movielist:
-                    print(i)
-                    # for j in i.get_variable("Language"):
-                    #     print(j)
-                return render(request,'admin/admin_home.html',{'movielist':movielist})
+                return redirect('admin_home')
             else:
                 login(request,user)
                 return render(request,'member/member_home.html') 
@@ -114,20 +113,78 @@ class Logout(View):
         logout(request)
         return redirect('home')
 
-class AddMovieView(CreateView):
-    model: Movie
-    form_class:AddMovieForm
-    
 
+class AdminHomeview(ListView):
+    model = Movie
+    template = 'admin/admin_home.html'
+
+    def get(self, request):
+        movielist=Movie.objects.filter(delete=False)
+        return render(request,'admin/admin_home.html',{'movielist':movielist})
+        
+
+
+
+class MemberHomeview(View):
+    model = Movie
+    template = 'member/member_home.html'
+
+    def get(self, request):
+
+        return render(request, self.template)
+
+
+class AddMovieview(CreateView):
+    model = Movie
+    form_class = AddMovieForm
+    template_name = 'admin/add_movie.html'
     def get(self,request):
-        return render(request,'add_movie')
-    
+        return render(request, self.template_name,{ 'form': self.form_class})
+
     def post(self, request):
-        form = self.form_class(request.POST)
-        form.save()
-        return render(request,'admin_home')
-        
-        
+        form =self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_home')
+        else:
+            msg = "Try Again!!! "
+            return HttpResponse(msg)
+
+# class DeleteMovieview(View):
 
 
-     
+#     def post(self, *args, **kwargs):
+#         id=kwargs['pk']
+#         movie=Movie.objects.get(id=id)
+#         movie.isdelete = True       
+#         return redirect('admin_home')
+
+
+    
+def DeleteMovieview(request,pk):
+    movie=Movie.objects.get(id=pk)
+    movie.isdelete = True
+    movie.save()
+    return redirect('admin_home')
+
+class UpdateMovieview(View):
+    model = Movie
+    fields = "__all__"
+    template_name = 'admin/update_movie.html'
+    
+    def get(self, request,pk):
+        mv = User.objects.get(id=pk)
+        fm = AddMovieForm(instance=mv)
+
+        return render (request, 'admin/update_movie.html',{'form':fm})
+
+    def post(self, request, pk):
+        mv = User.objects.get(id=pk)
+        fm = AddMovieForm(instance=mv)
+        if fm.is_valid():
+            fm.save()
+        return redirect('admin_home')
+
+
+
+    
