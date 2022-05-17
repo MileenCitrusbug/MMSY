@@ -199,9 +199,12 @@ class AddRatingview(View):
     template_name = 'member/rate_movie.html'
 
     def get(self,request):
+        print("hello")
         return render(request, self.template_name,{ 'form': self.form_class})
-     
+      
+
     def post(self, request):
+        print("hello1")
         form =self.form_class(request.POST)
         print(form)
         if form.is_valid():

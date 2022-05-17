@@ -16,20 +16,10 @@
     <div class="container-fluid">
         <table class="table table-hover table-dark">
             <thead>
-                <tr>
-                    <th scope="col">Comment</th>
-                    <th scope="col">Rating</th>
-                </tr>
-            </thead>
-            <tbody>
-                <form method="post">
-                    {% csrf_token %}
-
-                    <tr>
-                        <td>{{form.comment}}</td>
-                        <td>{{form.rating}}</td>
-                    </tr>
-
+            <form method="post">
+                    
+                {% csrf_token %}
+                {{ form.as_p }}
                </tbody>
         </table><br><br>
         <center><button type="submit" class="btn btn-secondary">Add</button></center>
