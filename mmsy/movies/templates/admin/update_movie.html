@@ -24,15 +24,16 @@
                 </tr>
             </thead>
             <tbody>
-                <form method="post">
+                <!-- <form method="post">
                     {% csrf_token %}
 
                     <tr>
-                        <td>{{movie.movie}}</td>
-                        <td>{{movie.language}}</td>
-                        <td>{{movie.cast}}</td>
-                        <td>{{movie.genre}}</td>
-                        <!-- <form method="POST">
+                        <td>{{form.movie}}</td>
+                        <td>{{form.language}}</td>
+                        <td>{{form.cast}}</td>
+                        <td>{{form.genre}}</td>
+                    </tr> -->
+                        <form method="POST">
 
                 {% csrf_token %}
                 {{ form.as_p }}
@@ -41,7 +42,7 @@
                 <input type="reset" value="Reset" class="btn btn-secondary">
                 <input type="submit" value=" Post " class="btn btn-success">
                 <br/>
-            </form> -->
+            </form>
 
                     </tr>
             </tbody>

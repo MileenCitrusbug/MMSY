@@ -14,13 +14,15 @@ urlpatterns = [
     path('',views.Home.as_view(),name='home'),
     path('admin_home/',views.AdminHomeview.as_view(),name='admin_home'),
     path('member_home/',views.MemberHomeview.as_view(),name='member_home'),
-    path('delete_movie/<int:pk>/',views.DeleteMovieview,name='delete_movie'),
+    path('delete_movie/<int:id>/',views.delete_movie_view,name='delete_movie'),
     path('update_movie/<int:pk>/',views.UpdateMovieview.as_view(),name='update_movie'),
     path('logout/',views.Logout.as_view(),name='logout'),
     path('add_movie/',views.AddMovieview.as_view(),name='add_movie'),
+    path('add_movietowatchlist/<int:pk>/',views.AddtoWatchlistview.as_view(),name='add_movietowatchlist'),
+    path('add_rating/',views.AddRatingview.as_view(),name='add_rating'),
 ]
 #path('account/eventadminlogin/', views.AdminLogin.as_view(), name='admin-login'),
-
+    # path('add_rating/',views.AddRatingview.as_view(),name='add_rating'),
 
 #    path('', LoginView.as_view(
 #            template_name='authentication/login.html',

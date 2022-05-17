@@ -35,12 +35,15 @@ class AddMovieForm(forms.ModelForm):
         model = Movie
         fields = "__all__"
         
-        # widgets = {
-        #     'Movie':forms.TextInput(attrs={'class':'form-control','placeholder':'Name'}),
-        #     'Genre':forms.Select(attrs={'class':'form-select','placeholder':'Type of Genre'}),
-        #     'Language':forms.Select(attrs={'class':'form-select','placeholder':'Available language'}),
-        #     'Cast':forms.Select(attrs={'class':'form-select','placeholder':'Select cast'}),
-           
-        # }
      
 
+class AddtoWatchlistForm(forms.ModelForm):
+    class Meta:
+        model = Watchlist
+
+        fields = "__all__"
+
+class AddRatingform(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = "__all__"
