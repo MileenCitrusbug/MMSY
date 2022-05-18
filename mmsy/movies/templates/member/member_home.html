@@ -8,7 +8,11 @@
     <div class="gred">
         
         <center><h1>Movie List</h1></center>    <br><br>
-        <center><a type="button" class="btn btn-secondary" href="">Your Watchlist</a></center>
+        <center><a type="button" class="btn btn-secondary" href="{% url 'add_movietowatchlist' %}">Add Movie to Watchlist</a>
+          <a type="submit" class="btn btn-secondary" href="{% url 'add_rating' %}">Rate Movie</a>
+          <a type="button" class="btn btn-secondary" href="{% url 'watchlist' %}">Your Watchlist</a>
+        </center>
+        
         <br><br>
         <div class="container-fluid">
          <table class="table table-hover table-dark">
@@ -18,7 +22,7 @@
                 <th scope="col">Language</th>
                 <th scope="col">Cast</th>
                 <th scope="col">Genre</th>
-                <th scope="col">Action</th>
+                <th scope="col">Rating</th>
               </tr>
             </thead>
             <tbody>
@@ -40,11 +44,11 @@
                    <p> {{genre}} </p>
                     {% endfor %}
                 </td>
-    
-                <td><a type="button" class="btn btn-secondary" href="{% url 'add_movietowatchlist' movie.id %}">Add Movie to Watchlist</a>
-                    <a type="submit" class="btn btn-secondary" href="{% url 'add_rating' %}">Rate Movie</a>
-                    
+                <td>
+
                 </td>
+    
+                
               </tr>
     
                {% endfor %}

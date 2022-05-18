@@ -43,7 +43,14 @@ class AddtoWatchlistForm(forms.ModelForm):
 
         fields = "__all__"
 
+  
 class AddRatingform(forms.ModelForm):
+    rating=forms.ChoiceField(choices=CHOICE_FIELD, widget=forms.Select)
     class Meta:
         model = Rating
-        fields = "__all__"
+        fields = ['movie','rating','comment']
+
+class Watchlistform(forms.ModelForm):
+    class Meta:
+        model = Watchlist
+        fields = ['movie']

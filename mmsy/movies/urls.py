@@ -18,8 +18,10 @@ urlpatterns = [
     path('update_movie/<int:pk>/',views.UpdateMovieview.as_view(),name='update_movie'),
     path('logout/',views.Logout.as_view(),name='logout'),
     path('add_movie/',views.AddMovieview.as_view(),name='add_movie'),
-    path('add_movietowatchlist/<int:pk>/',views.AddtoWatchlistview.as_view(),name='add_movietowatchlist'),
+    path('watchlist/',views.Watchlistview.as_view(),name='watchlist'),
     path('add_rating/',views.AddRatingview.as_view(),name='add_rating'),
+    path('add_movietowatchlist/',views.AddMovietoWatchlistview.as_view(),name='add_movietowatchlist'),
+
 ]
 #path('account/eventadminlogin/', views.AdminLogin.as_view(), name='admin-login'),
     # path('add_rating/',views.AddRatingview.as_view(),name='add_rating'),

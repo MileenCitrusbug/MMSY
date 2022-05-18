@@ -1,7 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Please confirm you want to add this movie to your Watchlist  </h1>
-<button type="submit">Confirm</button>
+<style>
+    .gred {
+        background: linear-gradient(to bottom, #0000009f 0%, #657781 100%);
+    }
+</style>
+<div class="gred">
+    <br><br>
+    <center>
+
+        <form method="post">
+            {% csrf_token %}
+            Movie name:
+            {{form.movie}}
+        
+
+
+    </center>
+
+<br><br><br><br>
+<center><button type="submit" class="btn btn-secondary">Add</button></center>
+</form>
+<br><br><br><br>
+</div>
 
 
 {% endblock %}

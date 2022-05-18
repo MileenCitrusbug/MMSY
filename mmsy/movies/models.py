@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.forms import BooleanField
+from django.db.models import Avg
 
 
 # class UserManager(BaseUserManager):
@@ -97,14 +98,35 @@ class Movie(models.Model):
     def __str__(self):
         return self.movie
 
+
+
+
+
+
+CHOICE_FIELD = [
+        (1,'1'),
+        (2,'2'),
+        (3,'3'),
+        (4,'4'),
+        (5,'5'),
+    ]
 class Rating(models.Model):
     user = models.ForeignKey(User,  on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie,  on_delete=models.CASCADE)
-    rating = models.CharField(max_length=10)
+    rating = models.PositiveSmallIntegerField(choices=CHOICE_FIELD,default=1)
     comment = models.TextField()
 
     def __str__(self):
-        return self.movie
+        return self.movie.movie
+
+    def avaregereview(self):
+        avg_rating=Rating.objects.filter(movie=self.movie).aggregate(avarage=Avg('rating'))
+        avg=0
+
+
+
+
+
 
 class Watchlist(models.Model):
     user = models.ForeignKey(User,  on_delete=models.CASCADE)
