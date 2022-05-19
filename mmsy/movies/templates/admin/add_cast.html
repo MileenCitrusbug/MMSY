@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .gred {
+        background: linear-gradient(to bottom, #0000009f 0%, #657781 100%);
+    }
+</style>
+<div class="gred">
+
+    <center>
+        <h1>Add Cast</h1>
+    </center> <br><br>
+
+    <br><br>
+    <div class="container-fluid">
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Cast Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Description</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <form method="post">
+                    {% csrf_token %}
+
+                    <tr>
+                        <td>{{form.name}}</td>
+                        <td>{{form.age}}</td>
+                        <td>{{form.description}}</td>         
+
+                    </tr>
+            </tbody>
+        </table><br><br>
+        <center><button type="submit" class="btn btn-secondary">Add</button></center>
+
+        </form>
+{% endblock %}

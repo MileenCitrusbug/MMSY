@@ -21,6 +21,8 @@ urlpatterns = [
     path('watchlist/',views.Watchlistview.as_view(),name='watchlist'),
     path('add_rating/',views.AddRatingview.as_view(),name='add_rating'),
     path('add_movietowatchlist/',views.AddMovietoWatchlistview.as_view(),name='add_movietowatchlist'),
+    path('add_addcast/',views.AddCastview.as_view(),name='add_cast'),
+    path('user_rating/',views.UserRatingview.as_view(),name='user_rating'),
 
 ]
 #path('account/eventadminlogin/', views.AdminLogin.as_view(), name='admin-login'),

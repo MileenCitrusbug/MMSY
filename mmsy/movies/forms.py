@@ -2,6 +2,7 @@ from dataclasses import fields
 from pickle import TRUE
 from pyexpat import model
 from tkinter.tix import Select
+from turtle import mode
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
@@ -31,9 +32,12 @@ class Signupmember(UserCreationForm):
         return user
 
 class AddMovieForm(forms.ModelForm):
+    # language=forms.ChoiceField(choices=CHOICE_LANGUAGE, widget=forms.Select)
+    language = forms.ModelMultipleChoiceField(queryset=Language.objects.all())
+    model=Movie
     class Meta:
         model = Movie
-        fields = "__all__"
+        fields = ["movie","language","cast","genre"]
         
      
 
@@ -54,3 +58,9 @@ class Watchlistform(forms.ModelForm):
     class Meta:
         model = Watchlist
         fields = ['movie']
+
+class AddCastform(forms.ModelForm):
+
+    class Meta:
+        model = Cast
+        fields = '__all__'

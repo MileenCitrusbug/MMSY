@@ -9,6 +9,7 @@ import email
 
 from statistics import mode
 from turtle import update
+from urllib import request
 from django.views.generic import View, CreateView,ListView,DeleteView,UpdateView,RedirectView
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
@@ -126,13 +127,20 @@ class AdminHomeview(ListView):
 class MemberHomeview(ListView):
     model = Movie
     template = 'member/member_home.html'
-    rate=Rating.objects.filter().annotate(avg=Avg('rate'))
-        # rating=rate.rating
-    print(rate)
+        
+        
+        
 
     def get(self, request):
+        # avgr=Movie.avaregereview
+        # print(avgr)
+        # star=Rating.objects.filter(user=request.user).first()
+        # print(star)
+        rate=Rating.objects.filter("rating")
         movielist=Movie.objects.filter(delete=False)
-        return render(request,'member/member_home.html',{'movielist':movielist})
+        print("m",movielist)
+        print("r",rate)
+        return render(request,'member/member_home.html',{'movielist':movielist,'rate':rate})
        
 
 
@@ -172,30 +180,7 @@ class UpdateMovieview(UpdateView):
     def get_success_url(self) :
         return reverse_lazy('admin_home')
 
-# class AddtoWatchlistview(View):
-#     model = Watchlist
-#     form_class = AddtoWatchlistForm
-#     template_name = 'member/addmovieto.html'
 
-#     def get(self,request,pk):
-#         return redirect(self.template_name)
-
-#     def post(self, request,pk):
-#         listing = Movie.objects.get(id=pk)
-#         print(listing)
-#         movie=listing.movie
-#         print('movie',movie)
-#         watchlist = Watchlist.objects.get_or_create(user=request.user.name, movie=movie)
-#         print(watchlist)
-#         watchlist.save()
-#         return redirect('member_home')
-      
-# def add_towatchlist_view(request, pk):
-#     movie=get_object_or_404(Movie,pk=pk)
-#     if Watchlist.objects.filter(user=request.user,movie=movie).exists():
-#         return HttpResponse("already exiest!!!")
-#     list,created=Watchlist.objects.get_or_create(user=request.user)
-#     list.item.add(item_to_save)
 
 class Watchlistview(View):
     model=Watchlist
@@ -225,6 +210,12 @@ class AddMovietoWatchlistview(View):
             return HttpResponse(msg)
 
 
+class UserRatingview(ListView):
+    model=Rating
+    template_name='member/member_rating.html'
+    def get(self,request):
+        ratinglist=Rating.objects.filter(user=request.user)
+        return render(request, self.template_name,{'ratinglist':ratinglist})
 
 
 
@@ -248,8 +239,29 @@ class AddRatingview(View):
       
         if form.is_valid():
             form.instance.user=request.user
+            print("hello")
+            if form.save():
+                return redirect('member_home')
+            else:
+                msg = "you already done review "
+            return HttpResponse(msg)
+        else:
+            msg = "Try Again!!! "
+            return HttpResponse(msg)
+
+
+class AddCastview(View):
+    model=Cast
+    form_class=AddCastform
+    template_name='admin/add_cast.html'
+    def get(self,request):
+         return render(request, self.template_name,{ 'form': self.form_class})
+
+    def post(self, request):
+        form =self.form_class(request.POST)
+        if form.is_valid():
             form.save()
-            return redirect('member_home')
+            return redirect('admin_home')
         else:
             msg = "Try Again!!! "
             return HttpResponse(msg)

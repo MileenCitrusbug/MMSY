@@ -64,7 +64,13 @@ class User(AbstractUser):
     
     # def __str__(self):
     #     return self.user
-
+# CHOICE_LANGUAGE=[
+# (1,"Hindi"),
+# (2,"English"),
+# (3,"Gujarati"),
+# (4,"Tamil"),
+# (5,"Telugu"),
+# ]
 
 class Language(models.Model): 
     language = models.CharField(max_length=20)
@@ -92,6 +98,13 @@ class Movie(models.Model):
     cast = models.ManyToManyField(Cast)
     genre = models.ManyToManyField(Genre)
     delete = models.BooleanField(default=False)
+    
+    def avaregereview(self):
+        rating=Rating.objects.filter(movie=self.movie).aggregate(average=Avg('rating'))
+        avg=0
+        if rating["average"] is not None:
+            avg=int(rating["average"])
+        return avg
 
    
 
@@ -116,13 +129,18 @@ class Rating(models.Model):
     rating = models.PositiveSmallIntegerField(choices=CHOICE_FIELD,default=1)
     comment = models.TextField()
 
+    class Meta:
+        unique_together = ['user', 'movie']
+
     def __str__(self):
         return self.movie.movie
 
     def avaregereview(self):
-        avg_rating=Rating.objects.filter(movie=self.movie).aggregate(avarage=Avg('rating'))
+        rating=Rating.objects.filter(movie=self.movie).aggregate(average=Avg('rating'))
         avg=0
-
+        if rating["average"] is not None:
+            avg=float(rating["average"])
+        return avg
 
 
 

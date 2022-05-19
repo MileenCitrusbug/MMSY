@@ -11,6 +11,7 @@
         <center><a type="button" class="btn btn-secondary" href="{% url 'add_movietowatchlist' %}">Add Movie to Watchlist</a>
           <a type="submit" class="btn btn-secondary" href="{% url 'add_rating' %}">Rate Movie</a>
           <a type="button" class="btn btn-secondary" href="{% url 'watchlist' %}">Your Watchlist</a>
+          <a type="button" class="btn btn-secondary" href="{% url 'user_rating' %}">Your rating</a>
         </center>
         
         <br><br>
@@ -44,7 +45,16 @@
                    <p> {{genre}} </p>
                     {% endfor %}
                 </td>
-                <td>
+                <td>  
+                  {% for r  in rate %}
+                  {% for m in  movielist %}
+                  {% if r.movie == m.movie %}
+                <p> {{r.rating}} </p>
+                {% endif %}
+                {% endfor %}           
+                
+                {% endfor %}
+
 
                 </td>
     
