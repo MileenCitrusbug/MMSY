@@ -46,14 +46,10 @@
                     {% endfor %}
                 </td>
                 <td>  
-                  {% for r  in rate %}
-                  {% for m in  movielist %}
-                  {% if r.movie == m.movie %}
-                <p> {{r.rating}} </p>
-                {% endif %}
-                {% endfor %}           
-                
-                {% endfor %}
+                  
+                  {% for r in rate %}
+                  <p>{{r}}}</p>
+                  {% endfor %}
 
 
                 </td>

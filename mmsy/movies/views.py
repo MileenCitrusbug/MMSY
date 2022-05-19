@@ -136,11 +136,23 @@ class MemberHomeview(ListView):
         # print(avgr)
         # star=Rating.objects.filter(user=request.user).first()
         # print(star)
-        rate=Rating.objects.filter("rating")
+        # rate=Rating.objects.filter(user=request.user)
+        # from django.db.models import Avg
+        # star=rate.rating.objects.all()
+        # for abc in rate:
+        #     xyz=Rating.objects.all().aggregate(Avg('rating'))
+           
+
+        # print(rate.count())
+
         movielist=Movie.objects.filter(delete=False)
-        print("m",movielist)
-        print("r",rate)
-        return render(request,'member/member_home.html',{'movielist':movielist,'rate':rate})
+       
+        for movie in movielist:
+            final_rating=Rating.objects.filter(movie=movie).aggregate(Avg('rating'))
+            print(final_rating)
+        # print("m",movielist)
+        # print("r",rate)
+        return render(request,'member/member_home.html',{'movielist':movielist,'rate':final_rating})
        
 
 
