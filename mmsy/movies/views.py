@@ -22,8 +22,7 @@ from django.contrib.auth import get_user_model, login,logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from django.urls import reverse_lazy
-from django.db.models import Avg
-
+from django.contrib import messages
 
 
 
@@ -46,20 +45,16 @@ class Login(View):
         valid = check_password(raw_password,password)
         
         if not valid:
-            return  HttpResponse("incorrect password")
-            
-
-        user=User.objects.get(email=email) 
-        if user.is_authenticated:
-
+            messages.warning(request, 'Please correct the error below.')
+        else:
+            user=User.objects.get(email=email)
             if user.is_admin == True:
                 login(request, user)
                 return redirect('admin_home')
             else:
                 login(request,user)
-                return redirect('member_home') 
-        else:
-            return HttpResponse("invalid login")
+                return redirect('member_home')
+           
 
 class Signup_admin(CreateView):
     model=User
@@ -132,27 +127,29 @@ class MemberHomeview(ListView):
         
 
     def get(self, request):
-        # avgr=Movie.avaregereview
-        # print(avgr)
-        # star=Rating.objects.filter(user=request.user).first()
-        # print(star)
-        # rate=Rating.objects.filter(user=request.user)
-        # from django.db.models import Avg
-        # star=rate.rating.objects.all()
-        # for abc in rate:
-        #     xyz=Rating.objects.all().aggregate(Avg('rating'))
-           
-
-        # print(rate.count())
 
         movielist=Movie.objects.filter(delete=False)
-       
-        for movie in movielist:
-            final_rating=Rating.objects.filter(movie=movie).aggregate(Avg('rating'))
-            print(final_rating)
+        # for i in movielist:
+            # print(movielist.all())
+        
+        # print(movielist)
+        # for movie in movielist:
+        #     final_rating=Rating.objects.filter(movie=movie).aggregate(Avg('rating'))
+        #     rate.append(final_rating)
+        # print(rate)
+        # print(final_rating.values())    
+        # rate["final_rating"]=final_rating['rating__avg']
+        # for i in rate:
+        #     for j in i:
+        #         if j is None:
+        #             j=0
+                
+        #         star.append(j)
+                # print(j)
+        # print (star)
         # print("m",movielist)
         # print("r",rate)
-        return render(request,'member/member_home.html',{'movielist':movielist,'rate':final_rating})
+        return render(request,'member/member_home.html',{'movielist':movielist})
        
 
 
@@ -222,13 +219,16 @@ class AddMovietoWatchlistview(View):
             return HttpResponse(msg)
 
 
-class UserRatingview(ListView):
+class UserRatingview(View):
     model=Rating
     template_name='member/member_rating.html'
     def get(self,request):
-        ratinglist=Rating.objects.filter(user=request.user)
+        ratinglist=Rating.objects.filter(user_id=request.user)
+        # for i in ratinglist:
+        #     print(i)
+    
+        print(ratinglist.all())
         return render(request, self.template_name,{'ratinglist':ratinglist})
-
 
 
 

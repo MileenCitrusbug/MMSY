@@ -33,7 +33,9 @@ class Signupmember(UserCreationForm):
 
 class AddMovieForm(forms.ModelForm):
     # language=forms.ChoiceField(choices=CHOICE_LANGUAGE, widget=forms.Select)
-    language = forms.ModelMultipleChoiceField(queryset=Language.objects.all())
+    language = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,queryset=Language.objects.all(),required=False)
+    cast = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,queryset=Cast.objects.all(),required=False)
+    genre = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,queryset=Genre.objects.all(),required=False)
     model=Movie
     class Meta:
         model = Movie
@@ -55,6 +57,7 @@ class AddRatingform(forms.ModelForm):
         fields = ['movie','rating','comment']
 
 class Watchlistform(forms.ModelForm):
+    movie= forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,queryset=Movie.objects.filter(delete=False),required=False)
     class Meta:
         model = Watchlist
         fields = ['movie']

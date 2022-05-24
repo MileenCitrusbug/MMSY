@@ -2,57 +2,60 @@
 
 {% block content %}
 <style>
-.gred{ background: linear-gradient(to bottom, #0000009f 0%, #657781 100%);}
-
+  .gred {
+    background: linear-gradient(to bottom, #0000009f 0%, #657781 100%);
+  }
 </style>
 <div class="gred">
-    
-    <center><h1>Movie List</h1></center>    <br><br>
-    <center><a type="button" class="btn btn-secondary" href="{% url 'add_movie' %}">Add Movie</a>
-      <a type="button" class="btn btn-secondary" href="{% url 'add_cast' %}">Add Cast</a>
-    </center>
-    <br><br>
-    <div class="container-fluid">
-     <table class="table table-hover table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Movie Name</th>
-            <th scope="col">Language</th>
-            <th scope="col">Cast</th>
-            <th scope="col">Genre</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for movie in movielist %}
-          <tr>
-            <td>{{movie.movie}}</td>
 
-            <td>{% for movie in movie.language.all%}
-               <p> {{movie}} </p>
-                {% endfor %}
-            </td>
+  <center>
+    <h1>Movie List</h1>
+  </center> <br><br>
+  <center><a type="button" class="btn btn-secondary" href="{% url 'add_movie' %}">Add Movie</a>
+    <a type="button" class="btn btn-secondary" href="{% url 'add_cast' %}">Add Cast</a>
+  </center>
+  <br><br>
+  <div class="container-fluid">
+    <table class="table table-hover table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Movie Name</th>
+          <th scope="col">Language</th>
+          <th scope="col">Cast</th>
+          <th scope="col">Genre</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for movie in movielist %}
+        <tr>
+          <td>{{movie.movie}}</td>
 
-            <td>{% for cast in movie.cast.all %}
-                <p>{{cast}}</p>
-                {% endfor %}
-            </td>
+          <td>{% for movie in movie.language.all%}
+            <p> {{movie}} </p>
+            {% endfor %}
+          </td>
 
-            <td>{% for genre in movie.genre.all %}
-               <p> {{genre}} </p>
-                {% endfor %}
-            </td>
+          <td>{% for cast in movie.cast.all %}
+            <p>{{cast}}</p>
+            {% endfor %}
+          </td>
 
-            <td><a type="button" class="btn btn-secondary" href="{% url 'delete_movie' movie.id %}">Delete</a>
-                <a type="button" class="btn btn-secondary" href="{% url 'update_movie' movie.id %}">Update</a>
-                
-            </td>
-          </tr>
+          <td>{% for genre in movie.genre.all %}
+            <p> {{genre}} </p>
+            {% endfor %}
+          </td>
 
-           {% endfor %}
-        </tbody>
-      </table><br><br><br><br><br>
-    </div>
+          <td><a type="button" class="btn btn-secondary" href="{% url 'delete_movie' movie.id %}">Delete</a>
+            <a type="button" class="btn btn-secondary" href="{% url 'update_movie' movie.id %}">Update</a>
+
+          </td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table><br><br><br><br><br>
+  </div>
 </div>
 
 {% endblock %}

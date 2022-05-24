@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% block content %}
 <style>
@@ -14,26 +13,33 @@
 
     <div class="container-fluid">
         <table class="table table-hover table-dark">
-           <thead>
-             <tr>
-               <th scope="col">Movie Name</th>
-             </tr>
-           </thead>
-           <tbody>
-            {% for movie in ratinglist %}
-            <td>
-                <p>{{movie.movie}}</p></td>
-            
-                <td>{% for i in movie %}
-                    <p>{{i.rating}}</p></td>
-            
-                <td><p>{{i.comment}}</p></td>
+            <thead>
+                <tr>
+                    <th scope="col">Movie Name</th>
+                    <th scope="col">Movie rating</th>
+                    <th scope="col">Movie comment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in ratinglist %}
+                <tr>
+                    <td>
+                        <p>{{movie.movie}}</p>
+                    </td>
 
-             {% endfor %}
-           </tbody>
+                    <td>
+                        <p>{{movie.rating}}</p>
+                    </td>
+
+                    <td>
+                        <p>{{movie.comment}}</p>
+                    </td>
+                    {% endfor %}
+                </tr>
+            </tbody>
 
 
-</div>
+    </div>
 
 
-{% endblock %}
+    {% endblock %}

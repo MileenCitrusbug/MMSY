@@ -22,8 +22,16 @@
                     <th scope="col">Genre</th>
 
                 </tr>
-            </thead>
-            <tbody>
+            </thead> <form method="POST">
+
+                {% csrf_token %}
+            <tr>
+                <td>{{form.movie}}</td>
+                <td>{{form.language}}</td>
+                <td>{{form.cast}}</td>
+                <td>{{form.genre}}</td>
+            </tr>
+          
                 <!-- <form method="post">
                     {% csrf_token %}
 
@@ -33,23 +41,23 @@
                         <td>{{form.cast}}</td>
                         <td>{{form.genre}}</td>
                     </tr> -->
-                        <form method="POST">
-
-                {% csrf_token %}
-                {{ form.as_p }}
+             <tr>
                 <br/>
-                <br/>
-                <input type="reset" value="Reset" class="btn btn-secondary">
-                <input type="submit" value=" Post " class="btn btn-success">
-                <br/>
-            </form>
+                <!-- <input type="reset" value="Reset" class="btn btn-secondary">
+                <input type="submit" value=" Post " class="btn btn-success"> -->
+            </tr><br/>
+                <tbody>
+         
 
                     </tr>
             </tbody>
         </table><br><br>
-        <center><button type="submit" class="btn btn-secondary">Change</button></center>
-
-        </form>
+        <center>
+            <input type="reset" value="Reset" class="btn btn-secondary">
+                <input type="submit" value=" Post " class="btn btn-success">
+                <button type="submit" class="btn btn-secondary">Change</button></center>
+            </form>
+        
 
         <br><br><br>
     </div>
