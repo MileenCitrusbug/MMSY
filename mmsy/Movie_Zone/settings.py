@@ -14,6 +14,10 @@ from pathlib import Path
 import os
 from django.contrib.messages import constants as message_constants
 MESSAGE_LEVEL = message_constants.DEBUG
+import os
+import sys
+from os import path
+from pathlib import Path
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,6 +40,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'movies',
+    'customadmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -122,11 +127,21 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
+
+MEDIA_ROOT = path.join(BASE_DIR, 'media').replace('\\', '/')
+
+MEDIA_URL = '/media/'
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+STATIC_ROOT = path.join(BASE_DIR, 'static').replace('\\', '/')
 
 STATIC_URL = 'static/'
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    # os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR,'customadmin','static')
 ]
 
 
