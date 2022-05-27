@@ -1,4 +1,5 @@
 from multiprocessing import context
+from re import template
 from customadmin.mixins import HasPermissionsMixin
 from customadmin.views.generic import (
     MyCreateView,
@@ -15,7 +16,13 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.template.loader import get_template
 from django.views.generic import TemplateView, DetailView
-
+from django.contrib.auth import get_user_model, login,logout
+from django.views.generic import View
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth.hashers import check_password
+from django.contrib import messages
+from audioop import reverse
+from  customadmin.forms.user import UserChangeForm, UserCreationForm
 
 # from ..forms import UserChangeForm, UserCreationForm
 from django.shortcuts import reverse, render
@@ -62,3 +69,57 @@ class UserListView(MyListView):
 
     def get_queryset(self):
         return self.model.objects.exclude(is_staff=True).exclude(email=self.request.user).exclude(email=None)
+
+
+class LogoutView(View):
+    template_name= "registration/logged_out.html"
+    def get(self, request):
+        logout(request)
+        return redirect(self.template_name)
+
+class LoginView(View):
+    model=User
+    template_name = 'customadmin/index.html'
+    def get(self,request):
+        return render(request,'registration/login.html')
+
+
+    def post(self,request):
+        email=request.POST['email']
+        raw_password=request.POST['password']
+        print(raw_password)
+        pw=User.objects.get(email=email)
+        print(email)
+        print(pw)
+        password=pw.password
+        valid = check_password(raw_password,password)
+        print(valid)
+        if not valid:
+            messages.warning(request, 'Please correct the error below.')
+        else:
+            user=User.objects.get(email=email)
+            if user.is_superuser == True:
+                login(request, user)
+                return redirect('dashboard')
+            else:
+                login(request,user)
+                return HttpResponse("invalid login")
+
+
+class UserCreateView(MyCreateView):
+    """View to create User"""
+
+    model = User
+    form_class = UserCreationForm
+    template_name = "customadmin/adminuser/user_form.html"
+    # permission_required = ("customadmin.add_user",)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # kwargs["user"] = self.request.user
+
+        return kwargs
+
+    def get_success_url(self):
+        # opts = self.model._meta
+        return reverse("customadmin:user-list")

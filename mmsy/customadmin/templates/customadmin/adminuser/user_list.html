@@ -13,13 +13,13 @@
     {% include "customadmin/includes/list_header_card.html" with title="Create a new user" subtitle="Create a new user and assign with individual or group permissions." show_button=True %}
 
     <div class="ibox float-e-margins">
-        {% comment %} <div class="ibox-title">
+       <div class="ibox-title">
             <div class="ibox-tools">
                 {% if perms.users.add_user %}
                 <a href="{% url opts|admin_urlname:'create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> Add {{ opts.verbose_name|capfirst }}</a>
                 {% endif %}
             </div>
-        </div> {% endcomment %}
+        </div> 
 
 
         <div class="ibox-content">
@@ -30,8 +30,6 @@
                             <th>Email</th>
                             <th>Firstname</th>
                             <th>Lastname</th>
-                            <th>Phone Number</th>
-                            <th>Profile Image</th>
                             <th>Active</th>
                             <th></th>
                         </tr>
@@ -41,10 +39,8 @@
                             <th>Email</th>
                             <th>Firstname</th>
                             <th>Lastname</th>
-                            <th>Phone Number</th>
-                            <th>Profile Image</th>
                             <th>Active</th>
-                            <th></th>
+                            
                         </tr>
                     </tfoot>
                     <tbody>
@@ -53,12 +49,7 @@
                             <td>{{ o.email }}</td>
                             <td>{{ o.first_name }}</td>
                             <td>{{ o.last_name }}</td>
-                            <td>{{ o.phone }}</td>
-                            {% if o.profile_image %}
-                            <td height="80px" width="180px"><img src="{{MEDIA_URL}}{{ o.profile_image.url }}" alt="no image" height="80x" width="180px"></td>
-                            {% else %}
-                            <td>No image</td>
-                            {% endif %}
+                        
                             <td>{% show_check o.is_active %}</td>
                             <td class="row-actions">
                                 {% include "customadmin/partials/list_row_more_actions.html" %}
@@ -80,7 +71,7 @@
 <script src="{% static 'customadmin/js/userroles.js' %}"></script>
 
 <script>
-    var pagination_url = "{% url opts|admin_urlname:'list-ajax' %}";
+    var pagination_url = "{#}";
     $(function () {
         userroles.user.index();
     });
