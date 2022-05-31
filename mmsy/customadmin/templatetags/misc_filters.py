@@ -43,30 +43,30 @@ def as_json(obj):
 def admin_urlname(value, arg):
     # print('---------------------------------------------------------------------------------',value)
     pattern = "%s:%s-%s" % (value.app_label, value.model_name, arg)
-    if value.model_name == 'user':
-        pattern = "%s:%s-%s" % ('customadmin', 'user', arg)
-    if value.model_name == 'usercard':
-        pattern = "%s:%s-%s" % ('customadmin', 'usercard', arg)
-    if value.model_name == 'creator':
-        pattern = "%s:%s-%s" % ('customadmin', 'creator', arg)
-    if value.model_name == 'creatorclass':
-        pattern = "%s:%s-%s" % ('customadmin', 'creatorclass', arg)
-    if value.model_name == 'stream':
-        pattern = "%s:%s-%s" % ('customadmin', 'stream', arg)
-    if value.model_name == 'creatorreview':
-        pattern = "%s:%s-%s" % ('customadmin', 'creatorreview', arg)
-    if value.model_name == 'classreview':
-        pattern = "%s:%s-%s" % ('customadmin', 'classreview', arg)
-    if value.model_name == 'materialcategory':
-        pattern = "%s:%s-%s" % ('customadmin', 'materialcategory', arg)
-    if value.model_name == 'material':
-        pattern = "%s:%s-%s" % ('customadmin', 'material', arg)
-    if value.model_name == 'onetoonesession':
-        pattern = "%s:%s-%s" % ('customadmin', 'onetoonesession', arg)
-    if value.model_name == 'streambooking':
-        pattern = "%s:%s-%s" % ('customadmin', 'streambooking', arg)
-    if value.model_name == 'sessionbooking':
-        pattern = "%s:%s-%s" % ('customadmin', 'sessionbooking', arg)
+    if value.model_name == 'User':
+        pattern = "%s:%s-%s" % ('movies', 'User', arg)
+    if value.model_name == 'Language':
+        pattern = "%s:%s-%s" % ('movies', 'Language', arg)
+    if value.model_name == 'Cast':
+        pattern = "%s:%s-%s" % ('movies', 'Cast', arg)
+    if value.model_name == 'Genre':
+        pattern = "%s:%s-%s" % ('movies', 'Genre', arg)
+    if value.model_name == 'Movie':
+        pattern = "%s:%s-%s" % ('movies', 'Movie', arg)
+    # if value.model_name == 'creatorreview':
+    #     pattern = "%s:%s-%s" % ('customadmin', 'creatorreview', arg)
+    # if value.model_name == 'classreview':
+    #     pattern = "%s:%s-%s" % ('customadmin', 'classreview', arg)
+    # if value.model_name == 'materialcategory':
+    #     pattern = "%s:%s-%s" % ('customadmin', 'materialcategory', arg)
+    # if value.model_name == 'material':
+    #     pattern = "%s:%s-%s" % ('customadmin', 'material', arg)
+    # if value.model_name == 'onetoonesession':
+    #     pattern = "%s:%s-%s" % ('customadmin', 'onetoonesession', arg)
+    # if value.model_name == 'streambooking':
+    #     pattern = "%s:%s-%s" % ('customadmin', 'streambooking', arg)
+    # if value.model_name == 'sessionbooking':
+        # pattern = "%s:%s-%s" % ('customadmin', 'sessionbooking', arg)
     # print('---------------------------------------------------------------------------------',pattern)
     return pattern
 

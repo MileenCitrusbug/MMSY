@@ -13,24 +13,40 @@ from django.db.models import Avg
 class User(AbstractUser):
     is_admin=models.BooleanField(default=False)
     is_subscriber=models.BooleanField(default=False)
+    class Meta:
+        verbose_name = "User"
+        verbose_name_plural = "Users"
 
 
 class Language(models.Model): 
     language = models.CharField(max_length=20)
-
+    class Meta:
+        verbose_name = "Language"
+        verbose_name_plural = "Languages"
     def __str__(self):
         return self.language
+
+        
+
 
 class Cast(models.Model):
     name = models.CharField(max_length=50)
     age = models.PositiveIntegerField(default=1)
     description = models.TextField()
+    
+    class Meta:
+        verbose_name = "Cast"
+        verbose_name_plural = "Casts"
 
     def __str__(self):
         return self.name
 
 class Genre(models.Model):
     genre = models.CharField(max_length=20)
+
+    class Meta:
+        verbose_name = "Language"
+        verbose_name_plural = "Languages"
 
     def __str__(self):
         return self.genre
@@ -42,6 +58,10 @@ class Movie(models.Model):
     genre = models.ManyToManyField(Genre)
     delete = models.BooleanField(default=False)
     
+    class Meta:
+        verbose_name = "Movie"
+        verbose_name_plural = "Movies"
+
     def avaregereview(self):
         rating=Rating.objects.filter(movie_id=self.pk).aggregate(average=Avg('rating'))
         avg=0
@@ -73,6 +93,10 @@ class Rating(models.Model):
     comment = models.TextField()
 
     class Meta:
+        verbose_name = "Rating"
+        verbose_name_plural = "Ratings"
+
+    class Meta:
         unique_together = ['user', 'movie']
 
     def __str__(self):
@@ -87,6 +111,10 @@ class Rating(models.Model):
 class Watchlist(models.Model):
     user = models.ForeignKey(User,  on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Watchlist"
+        verbose_name_plural = "Watchlists"
 
     def __str__(self):
         return str(self.user)+"  |  "+ str(self.movie)

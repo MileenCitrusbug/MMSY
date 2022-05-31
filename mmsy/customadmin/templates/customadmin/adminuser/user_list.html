@@ -13,14 +13,13 @@
     {% include "customadmin/includes/list_header_card.html" with title="Create a new user" subtitle="Create a new user and assign with individual or group permissions." show_button=True %}
 
     <div class="ibox float-e-margins">
-       <div class="ibox-title">
+        {% comment %} <div class="ibox-title">
             <div class="ibox-tools">
                 {% if perms.users.add_user %}
                 <a href="{% url opts|admin_urlname:'create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> Add {{ opts.verbose_name|capfirst }}</a>
                 {% endif %}
             </div>
-        </div> 
-
+        </div> {% endcomment %}
 
         <div class="ibox-content">
             <div class="table-responsive">

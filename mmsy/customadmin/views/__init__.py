@@ -6,11 +6,20 @@ from .users import (
     UserDetailView,
     # UserAjaxPagination,
     UserCreateView,
-    # UserDeleteView,
+    UserDeleteView,
     UserListView,
     LoginView,
     LogoutView,
     # UserPasswordView,
-    # UserUpdateView,
-    # export_user_csv,
+    UserUpdateView,
+    export_user_csv,
 )
+
+
+from .movies import (
+    TestimonialAjaxPagination,
+    TestimonialCreateView,
+    TestimonialDeleteView,
+    MovieListView,
+    TestimonialUpdateView
+    )

@@ -1,0 +1,62 @@
+{% extends 'customadmin/change_form.html' %}
+{% load static %}
+
+{% load admin_extras %}
+{% load misc_filters %}
+{% load i18n %}
+
+
+{% block page_content %}
+<form id="{{ opts.model_name }}-form" action="" method="post" enctype="multipart/form-data" autocomplete="off">
+
+    {% include "customadmin/partials/form_hidden_fields.html" %}
+   
+    <div class="ibox float-e-margins">
+
+        
+
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Movie name</p> {{ form.movie }}
+                </div>
+                <div class="col-sm-6">
+                    <p>Cast</p> {{ form.cast }}
+                </div>
+            </div><br><br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Genre</p> {{ form.genre }}
+                </div>
+                <div class="col-sm-6">
+                    Language {{ form.language }}
+                </div>
+    
+            </div>
+
+           
+
+        </div>
+        <!-- /ibox-content -->
+
+    </div>
+    <!-- /ibox -->
+
+
+    {% include "customadmin/partials/form_footer.html" %}
+
+</form>
+
+{% endblock %}
+
+
+{% block js %}
+{{ block.super }}
+
+<script src="{% static 'customadmin/js/userroles.js' %}"></script>
+<script>
+    $(function () {
+        userroles.testimonials.details();
+    });
+</script>
+{% endblock %}

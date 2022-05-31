@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from .. import views
+from customadmin import views
 from django.views.generic import TemplateView
 from . import urls_core
 

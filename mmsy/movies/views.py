@@ -129,26 +129,8 @@ class MemberHomeview(ListView):
     def get(self, request):
 
         movielist=Movie.objects.filter(delete=False)
-        # for i in movielist:
-            # print(movielist.all())
-        
-        # print(movielist)
-        # for movie in movielist:
-        #     final_rating=Rating.objects.filter(movie=movie).aggregate(Avg('rating'))
-        #     rate.append(final_rating)
-        # print(rate)
-        # print(final_rating.values())    
-        # rate["final_rating"]=final_rating['rating__avg']
-        # for i in rate:
-        #     for j in i:
-        #         if j is None:
-        #             j=0
-                
-        #         star.append(j)
-                # print(j)
-        # print (star)
-        # print("m",movielist)
-        # print("r",rate)
+     
+
         return render(request,'member/member_home.html',{'movielist':movielist})
        
 

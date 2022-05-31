@@ -19,6 +19,7 @@ class UserCreationForm(forms.ModelForm):
             "password",
             "first_name",
             "last_name",
+            "username"
         ]
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -29,6 +30,7 @@ class UserCreationForm(forms.ModelForm):
         password = cleaned_data.get("password")
         last_name = cleaned_data.get("last_name")
         first_name = cleaned_data.get("first_name")
+        user_name = cleaned_data.get("username")
 
         if not email :
             raise forms.ValidationError(
@@ -45,6 +47,10 @@ class UserCreationForm(forms.ModelForm):
         if not first_name :
             raise forms.ValidationError(
                 "Please add first name."
+            )
+        if not user_name :
+            raise forms.ValidationError(
+                "Please add user name."
             )
     def save(self, commit=True):
         instance = super().save(commit=False)

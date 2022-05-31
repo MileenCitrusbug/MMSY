@@ -1,9 +1,9 @@
 {% extends 'customadmin/change_form.html' %}
 {% load static %}
-{% load widget_tweaks %}
+
 {% load admin_extras %}
 {% load misc_filters %}
-{% load crispy_forms_tags %}
+
 {% load i18n %}
 
 
@@ -20,7 +20,7 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        {{ form.email|as_crispy_field }}
+                      <p>Email</p>  {{ form.email }}
                     </div>
                     <div class="col-sm-6">
                   
@@ -31,7 +31,7 @@
                 <div class="row">
                     
                     <div class="col-sm-6">
-                        {{ form.password|as_crispy_field }}
+                       <p>Password</p> {{ form.password }}
                     </div>
                     <br>
                     
@@ -54,31 +54,14 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        {{ form.first_name|as_crispy_field }}
+                       <p>First Name</p> {{ form.first_name}}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.last_name|as_crispy_field }}
+                      <p>Last Name</p>  {{ form.last_name }}
                     </div>
                 </div>
                 <br>
-                <div class="row">
-                   
-                    <div class="col-sm-6">
-                        {{ form.date_of_birth|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form.language|as_crispy_field }}
-                    </div>
-                    
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        {{ form.phone|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form.profile_image|as_crispy_field }}
-                    </div>
-                </div>
+              
                
 
                 

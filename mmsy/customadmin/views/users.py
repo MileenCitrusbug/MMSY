@@ -1,4 +1,5 @@
 from multiprocessing import context
+from pyexpat import model
 from re import template
 from customadmin.mixins import HasPermissionsMixin
 from customadmin.views.generic import (
@@ -47,11 +48,27 @@ class UserDetailView(MyDetailView):
 class IndexView(LoginRequiredMixin, TemplateView):
     template_name = "customadmin/index.html"
     context = {}
+    model= Movie
 
     def get(self, request):
         self.context['user_count']=User.objects.all().exclude(is_subscriber=False).count()
         self.context['movie_count']=Movie.objects.all().exclude(delete=True).count()
         self.context['delete_count']=Movie.objects.all().exclude(delete=False).count()
+        self.context['movie_name']=Movie.objects.values('movie').exclude(delete=True)
+        name=[]
+        list1=Movie.objects.values('movie').exclude(delete=True)
+        list1 = list1[:5]
+        for l in list1:
+            for k,v in l.items():
+                    name.append(str(v))
+                    
+
+        # movi1=Movie.avaregereview()
+        print(list1)
+
+        self.context['movie']=name
+        # print( type(self.context['movie']))
+
         return render(request, self.template_name, self.context)
 
 
@@ -123,3 +140,63 @@ class UserCreateView(MyCreateView):
     def get_success_url(self):
         # opts = self.model._meta
         return reverse("customadmin:user-list")
+
+
+class UserDeleteView(MyDeleteView):
+    """View to delete User"""
+
+    model = User
+    template_name = "customadmin/confirm_delete.html"
+    permission_required = ("customadmin.delete_user",)
+
+    def get_success_url(self):
+        # opts = self.model._meta
+        return reverse("customadmin:user-list")
+
+
+class UserUpdateView(MyUpdateView):
+    """View to update User"""
+
+    model = User
+    form_class = UserChangeForm
+    template_name = "customadmin/adminuser/user_form_update.html"
+    permission_required = ("customadmin.change_user",)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        
+        # kwargs["user"] = self.request.user
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context["form"]=self.form_class
+        return context
+
+    def get_success_url(self):
+        # opts = self.model._meta
+        return reverse("customadmin:user-list")
+
+
+def export_user_csv(request):
+
+    output = []
+    response = HttpResponse (content_type='text/csv')
+    filename = u"User.csv"
+    response['Content-Disposition'] = u'attachment; filename="{0}"'.format(filename)
+
+    writer = csv.writer(response)
+    query_set = User.objects.all()
+
+    #Header
+    writer.writerow(['Name', "Username",'Email',"is_admin", "is_superuser","is_subsriber"])
+    for user in query_set:
+        if user.groups.all():
+            gp = user.groups.all()[0].name
+        else:
+            gp = None
+
+        output.append([user.first_name, user.last_name, user.username, user.email, user.is_admin,user.is_superuser,user.is_subsriber])
+    #CSV Data
+    writer.writerows(output)
+    return response

@@ -4,7 +4,7 @@
 
 <div class="modal-footer">
     {% if object and has_delete_permission %}
-        <a data-title="{{ object }}" title="Delete" href="{% url opts|admin_urlname:'delete' object.pk|admin_urlquote %}" class="btn-delete btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+        <a data-title="{{ object }}" title="Delete" href="#" class="btn-delete btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
     {% endif %}
 
     {# <a href="javascript:history.back()" class="btn btn-white">Cancel</a> #}

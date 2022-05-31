@@ -37,12 +37,12 @@
 </li>
 
 <li class="breadcrumb-item">
-    {% if opts.verbose_name_plural == 'groups' %}
+    {% if opts.verbose_name_plural == 'Users' %}
 
-    {% if has_view_permission %}<a href="{% url opts|admin_urlname:'list' %}">User Roles</a>{% else %}User Roles{% endif %}
+    {% if has_view_permission %}<a href="#">User Roles</a>{% else %}User Roles{% endif %}
 
     {% else %}
-    {% if has_view_permission %}<a href="{% url opts|admin_urlname:'list' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
+    {% if has_view_permission %}<a href="#">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
 
     {% endif %}
     
