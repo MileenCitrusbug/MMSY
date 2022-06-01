@@ -24,6 +24,7 @@ from django.contrib.auth.hashers import check_password
 from django.contrib import messages
 from audioop import reverse
 from  customadmin.forms.user import UserChangeForm, UserCreationForm
+import json
 
 # from ..forms import UserChangeForm, UserCreationForm
 from django.shortcuts import reverse, render
@@ -55,18 +56,23 @@ class IndexView(LoginRequiredMixin, TemplateView):
         self.context['movie_count']=Movie.objects.all().exclude(delete=True).count()
         self.context['delete_count']=Movie.objects.all().exclude(delete=False).count()
         self.context['movie_name']=Movie.objects.values('movie').exclude(delete=True)
-        name=[]
-        list1=Movie.objects.values('movie').exclude(delete=True)
-        list1 = list1[:5]
-        for l in list1:
-            for k,v in l.items():
-                    name.append(str(v))
-                    
+        list1=Movie.objects.filter(delete=False)
+        # movi1=self.model.avaregereview()
+        movie_name=[]
+        movie_rating=[]
+        for i in list1:
+            name=i.movie
+            movie_name.append(name)
+            rating=i.avaregereview()
+            movie_rating.append(rating)
 
-        # movi1=Movie.avaregereview()
-        print(list1)
+            
+            
 
-        self.context['movie']=name
+        self.context['l1']=list1
+        self.context['name']=movie_name
+        self.context['rating']=movie_rating
+
         # print( type(self.context['movie']))
 
         return render(request, self.template_name, self.context)

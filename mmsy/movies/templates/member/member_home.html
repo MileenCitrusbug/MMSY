@@ -27,21 +27,21 @@
               </tr>
             </thead>
             <tbody>
-                {% for movie in movielist %}
+                {% for i in movielist %}
               <tr>
-                <td>{{movie.movie}}</td>
+                <td>{{i.movie}}</td>
     
-                <td>{% for movie in movie.language.all%}
-                   <p> {{movie}} </p>
+                <td>{% for lang in i.language.all%}
+                   <p> {{lang}} </p>
                     {% endfor %}
                 </td>
     
-                <td>{% for cast in movie.cast.all %}
+                <td>{% for cast in i.cast.all %}
                     <p>{{cast}}</p>
                     {% endfor %}
                 </td>
     
-                <td>{% for genre in movie.genre.all %}
+                <td>{% for genre in i.genre.all %}
                    <p> {{genre}} </p>
                     {% endfor %}
                 </td>
@@ -49,7 +49,7 @@
                 <td>  
               
    
-                {{movie.avaregereview}}
+                {{i.avaregereview}}
 
     
                 {% endfor %}
